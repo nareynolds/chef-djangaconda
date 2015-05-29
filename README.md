@@ -5,17 +5,21 @@ Chef cookbook for installing a Django project with [Continuum Analytic](http://c
 A simple and complete example of how to use this cookbook for your own project can be found here: ....
 
 Resources for best practices for testing and development of such a cookbook:
+- [git](https://git-scm.com/)
+- [VirtualBox](https://www.virtualbox.org/)
 - [Vagrant](https://www.vagrantup.com) for development
-- [Chef-DK](http://www.getchef.com/downloads/chef-dk/)
+- [Chef-DK](https://downloads.chef.io/chef-dk/)
+  - [Chef](https://www.chef.io/chef/)
   - [Berkshelf 3](http://berkshelf.com/) for dependency resolution
-  - [Test Kitchen](https://github.com/test-kitchen/test-kitchen) for
   - [Chefspec](https://github.com/sethvargo/chefspec) for rapid testing
+  - [Test Kitchen](https://github.com/test-kitchen/test-kitchen) for
 comprehensive testing across multiple platforms, with tests written in
+[serverspec](http://serverspec.org/)
   - [Foodcritic](http://acrmp.github.io/foodcritic/) for style checking
 
 ## Requirements
 
-Required for a quick start:
+Required for the quickstart:
 - [git](https://git-scm.com/)
 - [VirtualBox](https://www.virtualbox.org/) 4.0.x, 4.1.x, 4.2.x, or 4.3.x
 - [Vagrant](https://www.vagrantup.com/) 1.6+
@@ -35,6 +39,9 @@ Full list of required cookbook:
 - [windows](https://github.com/opscode-cookbooks/windows)
 - [yum](https://github.com/chef-cookbooks/yum)
 - [yum-epel](https://github.com/chef-cookbooks/yum-epel)
+
+## The Anaconda Cookbook
+This awesome cookbook and more details about using it can be found at its repo: [https://github.com/thmttch/chef-continuum-anaconda](https://github.com/thmttch/chef-continuum-anaconda)
 
 ## Quickstart
 
@@ -65,13 +72,6 @@ $vagrant> exit
 ```
 
 Include any additional packages you want install by modifying [cookbooks/anaconda-packages/recipes/default.rb](cookbooks/anaconda-packages/recipes/default.rb).
-
-## The Anaconda Cookbook
-This awesome cookbook and more details about using it can be found at its repo: [https://github.com/thmttch/chef-continuum-anaconda](https://github.com/thmttch/chef-continuum-anaconda)
-
-## Author
-
-Nathaniel Reynolds (nathaniel.reynolds@gmail.com)
 
 
 Attributes
@@ -112,18 +112,22 @@ Just include `django-example` in your node's `run_list`:
 }
 ```
 
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
+## Contributing
 
-e.g.
 1. Fork the repository on Github
+
 2. Create a named feature branch (like `add_component_x`)
+
 3. Write your change
+
 4. Write tests for your change (if applicable)
+
 5. Run the tests, ensuring they all pass
+
 6. Submit a Pull Request using Github
 
-License and Authors
--------------------
-Authors: TODO: List authors
+
+## Author
+
+Nathaniel Reynolds (nathaniel.reynolds@gmail.com)
+
