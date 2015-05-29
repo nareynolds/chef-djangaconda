@@ -1,6 +1,6 @@
 # djangaconda Cookbook
 
-Chef cookbook for installing a Django project with [Continuum Analytic](http://continuum.io/)'s [Anaconda](https://store.continuum.io/cshop/anaconda/).
+Chef cookbook for provisioning a Django project with [Continuum Analytic](http://continuum.io/)'s [Anaconda](https://store.continuum.io/cshop/anaconda/).
 
 A simple and complete example of how to use this cookbook for your own project can be found here: ....
 
