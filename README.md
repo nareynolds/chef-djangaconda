@@ -28,7 +28,7 @@ Required for the quickstart:
   - [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf): note
     that `>= 2.0.1` is required
 
-Full list of cookbook required for djangaconda:
+Full list of cookbook dependencies for djangaconda:
 - [anaconda](https://github.com/thmttch/chef-continuum-anaconda)
 - [apt](https://github.com/opscode-cookbooks/apt)
 - [build-essential](https://github.com/opscode-cookbooks/build-essential)
@@ -75,21 +75,6 @@ $vagrant> exit
 ```
 
 
-## Recipes
-
-### [default.rb](recipes/default.rb)
-
-This will install Anaconda, set the environment for all users, and install Django. Include any additional packages you want installed here. by modifying .
-
-### [create.rb](recipes/create.rb)
-
-This will create a new Django project in the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the project name via the 'create_project_name' attribute.
-
-### [clone.rb](recipes/clone.rb)
-
-This will git clone a project to the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the repo's name, source, branch, and destination via the attributes 'clone_repo_name', 'clone_repo_source', 'clone_repo_branch', 'clone_repo_destination', respectively.
-
-
 Attributes
 ----------
 TODO: List your cookbook attributes here.
@@ -113,18 +98,24 @@ e.g.
 
 Usage
 -----
-#### django-example::default
-TODO: Write usage instructions for each cookbook.
+#### [djangaconda::default](recipes/default.rb)
+This will install Anaconda, set the environment for all users, and install Django. Include any additional packages you want installed here. by modifying .
 
-e.g.
-Just include `django-example` in your node's `run_list`:
+#### [djangaconda::create](recipes/create.rb)
+This will create a new Django project in the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the project name via the 'create_project_name' attribute.
+
+#### [djangaconda::clone](recipes/clone.rb)
+This will git clone a project to the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the repo's name, source, branch, and destination via the attributes 'clone_repo_name', 'clone_repo_source', 'clone_repo_branch', 'clone_repo_destination', respectively.
+
+Just include one of all of these recipes in your node's `run_list`:
 
 ```json
 {
   "name":"my_node",
   "run_list": [
-    "recipe[django-example]"
-  ]
+    "recipe[djangaconda::default]",
+    "recipe[djangaconda::create]",
+    "recipe[djangaconda::clone]",  ]
 }
 ```
 
