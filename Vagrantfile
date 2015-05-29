@@ -64,7 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :accept_license => 'yes',
       },
       :djangaconda => {
-        :create_project_name => 'datamo',
+        :create_project_name => 'my_project',
         # :clone_repo_name => '',
         # :clone_repo_source => '',
         # :clone_repo_branch => '',
