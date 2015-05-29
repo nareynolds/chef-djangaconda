@@ -75,29 +75,8 @@ $vagrant> exit
 ```
 
 
-Attributes
-----------
-TODO: List your cookbook attributes here.
+## Usage
 
-e.g.
-#### django-example::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['django-example']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
-
-Usage
------
 #### [djangaconda::default](recipes/default.rb)
 This will install Anaconda, set the environment for all users, and install Django. Include any additional packages you want installed here. by modifying .
 
@@ -115,9 +94,53 @@ Just include one of all of these recipes in your node's `run_list`:
   "run_list": [
     "recipe[djangaconda::default]",
     "recipe[djangaconda::create]",
-    "recipe[djangaconda::clone]",  ]
+    "recipe[djangaconda::clone]",
+  ]
 }
 ```
+
+
+## Attributes
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['djangaconda']['create_project_name']</tt></td>
+    <td>String</td>
+    <td>Name of project to create</td>
+    <td><tt>true</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['djangaconda']['clone_repo_name']</tt></td>
+    <td>String</td>
+    <td>Name of git repository to clone</td>
+    <td><tt>true</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['djangaconda']['clone_repo_source']</tt></td>
+    <td>String</td>
+    <td>Source of git repository to clone</td>
+    <td><tt>true</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['djangaconda']['clone_repo_branch']</tt></td>
+    <td>String</td>
+    <td>Branch of git repository to clone</td>
+    <td><tt>true</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['djangaconda']['clone_repo_destination']</tt></td>
+    <td>String</td>
+    <td>Destination of where to clone the git repository</td>
+    <td><tt>true</tt></td>
+  </tr>
+</table>
+
 
 ## Contributing
 
