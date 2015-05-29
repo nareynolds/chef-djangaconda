@@ -17,6 +17,7 @@ comprehensive testing across multiple platforms, with tests written in
 [serverspec](http://serverspec.org/)
   - [Foodcritic](http://acrmp.github.io/foodcritic/) for style checking
 
+
 ## Requirements
 
 Required for the quickstart:
@@ -27,7 +28,7 @@ Required for the quickstart:
   - [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf): note
     that `>= 2.0.1` is required
 
-Full list of required cookbook:
+Full list of cookbook required for djangaconda:
 - [anaconda](https://github.com/thmttch/chef-continuum-anaconda)
 - [apt](https://github.com/opscode-cookbooks/apt)
 - [build-essential](https://github.com/opscode-cookbooks/build-essential)
@@ -40,8 +41,10 @@ Full list of required cookbook:
 - [yum](https://github.com/chef-cookbooks/yum)
 - [yum-epel](https://github.com/chef-cookbooks/yum-epel)
 
+
 ## The Anaconda Cookbook
 This awesome cookbook and more details about using it can be found at its repo: [https://github.com/thmttch/chef-continuum-anaconda](https://github.com/thmttch/chef-continuum-anaconda)
+
 
 ## Quickstart
 
@@ -49,10 +52,10 @@ The [Vagrantfile](Vagrantfile) is written to get your Anaconda environment up an
 
 ```bash
 # clone this repo
-$> git clone https://github.com/nareynolds/vagrant-chef-solo-anaconda3.git
+$> git clone https://github.com/nareynolds/chef-djangaconda.git
 
 # change working directory
-$> cd vagrant-chef-solo-anaconda3
+$> cd chef-djangaconda
 
 # start up vagrant - may take a while
 $> vagrant up
@@ -63,15 +66,28 @@ $> vagrant ssh
 
 # check your version of Anaconda
 $vagrant> conda --version
-conda 3.10.0
+conda 3.12.0
 
-# and have fun...
+# ...have fun...
 
 # exit your VM
 $vagrant> exit
 ```
 
-Include any additional packages you want install by modifying [cookbooks/anaconda-packages/recipes/default.rb](cookbooks/anaconda-packages/recipes/default.rb).
+
+## Recipes
+
+### [default.rb](recipes/default.rb)
+
+This will install Anaconda, set the environment for all users, and install Django. Include any additional packages you want installed here. by modifying .
+
+### [create.rb](recipes/create.rb)
+
+This will create a new Django project in the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the project name via the 'create_project_name' attribute.
+
+### [clone.rb](recipes/clone.rb)
+
+This will git clone a project to the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the repo's name, source, branch, and destination via the attributes 'clone_repo_name', 'clone_repo_source', 'clone_repo_branch', 'clone_repo_destination', respectively.
 
 
 Attributes
