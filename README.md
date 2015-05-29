@@ -113,31 +113,31 @@ Just include one of all of these recipes in your node's `run_list`:
     <td><tt>['djangaconda']['create_project_name']</tt></td>
     <td>String</td>
     <td>Name of project to create</td>
-    <td><tt>true</tt></td>
+    <td><tt>"my_project"</tt></td>
   </tr>
   <tr>
     <td><tt>['djangaconda']['clone_repo_name']</tt></td>
     <td>String</td>
     <td>Name of git repository to clone</td>
-    <td><tt>true</tt></td>
+    <td><tt>...</tt></td>
   </tr>
   <tr>
     <td><tt>['djangaconda']['clone_repo_source']</tt></td>
     <td>String</td>
     <td>Source of git repository to clone</td>
-    <td><tt>true</tt></td>
+    <td><tt>...</tt></td>
   </tr>
   <tr>
     <td><tt>['djangaconda']['clone_repo_branch']</tt></td>
     <td>String</td>
     <td>Branch of git repository to clone</td>
-    <td><tt>true</tt></td>
+    <td><tt>"master"</tt></td>
   </tr>
   <tr>
     <td><tt>['djangaconda']['clone_repo_destination']</tt></td>
     <td>String</td>
     <td>Destination of where to clone the git repository</td>
-    <td><tt>true</tt></td>
+    <td><tt>"#{node.anaconda.home}"</tt></td>
   </tr>
 </table>
 
