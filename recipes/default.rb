@@ -7,7 +7,11 @@
 # All rights reserved - Do Not Redistribute
 #
 
+# install Anaconda
 include_recipe 'anaconda::default'
+
+# set Anaconda environement for all users
+include_recipe 'anaconda::shell_conveniences'
 
 # install django into Anaconda
 anaconda_package 'django' do

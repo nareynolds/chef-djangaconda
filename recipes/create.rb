@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'anaconda::default'
-
 # get anaconda attributes
 conda_version = node.anaconda.version
 conda_install_dir = "#{node.anaconda.install_root}/#{conda_version}"
@@ -18,7 +16,7 @@ xgroup = node.anaconda.group
 home_dir = node.anaconda.home
 
 # get project attributes
-project_name = node.djangaconda.project_name
+project_name = node.djangaconda.create_project_name
 project_dir = "#{home_dir}/#{project_name}"
 
 # create project
