@@ -19,24 +19,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   $ vagrant plugin install vagrant-omnibus
   #
   if Vagrant.has_plugin?("vagrant-omnibus")
-    config.omnibus.chef_version = 'latest'
+    config.omnibus.chef_version = :latest
   end
 
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
-  config.vm.box = 'chef/ubuntu-14.04'
+  config.vm.box = "ubuntu/trusty64"
 
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.network "private_network", ip: "192.168.33.10"
 
-  # Assign this VM to a host-only network IP, allowing you to access it
-  # via the IP. Host-only networks can talk to the host machine as well as
-  # any other machines on the same network, but cannot be accessed (through this
-  # network interface) by any external networks.
-  config.vm.network :private_network, type: 'dhcp'
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
+  # Forward a port from the guest to the host, which allows for outside
+  # computers to access the VM, whereas host only networking does not.
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 8000, host: 8001
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -44,47 +42,43 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider :virtualbox do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
-  #
-  # View the documentation for the provider you're using for more
-  # information on available options.
-
   # The path to the Berksfile to use with Vagrant Berkshelf
-  # config.berkshelf.berksfile_path = "./Berksfile"
+  config.berkshelf.berksfile_path = "./Berksfile"
 
   # Enabling the Berkshelf plugin. To enable this globally, add this configuration
   # option to your ~/.vagrant.d/Vagrantfile file
   config.berkshelf.enabled = true
 
-  # An array of symbols representing groups of cookbook described in the Vagrantfile
-  # to exclusively install and copy to Vagrant's shelf.
-  # config.berkshelf.only = []
+  # Use chef to provision this machine
+  config.vm.provision "chef_solo" do |chef|
 
-  # An array of symbols representing groups of cookbook described in the Vagrantfile
-  # to skip installing and copying to Vagrant's shelf.
-  # config.berkshelf.except = []
+    # Cookbooks directory path relative to this file
+    chef.cookbooks_path = "cookbooks"
 
-  config.vm.provision :chef_solo do |chef|
+    # specify cookbook attributes
     chef.json = {
-      mysql: {
-        server_root_password: 'rootpass',
-        server_debian_password: 'debpass',
-        server_repl_password: 'replpass'
-      }
+      :anaconda => {
+        :version => 'miniconda-python3',
+        #:version => '3-2.2.0',
+        :flavor => 'x86_64', # should match VM
+        :accept_license => 'yes',
+      },
+      :djangaconda => {
+        :create_project_name => 'datamo',
+        # :clone_repo_name => '',
+        # :clone_repo_source => '',
+        # :clone_repo_branch => '',
+        # :clone_repo_destination => '',
+      },
     }
 
+    # specify the chef run list
     chef.run_list = [
-      'recipe[djangaconda::default]'
+      'recipe[djangaconda::default]',
+      'recipe[djangaconda::create]',
+      'recipe[djangaconda::clone]',
     ]
+
   end
+
 end
