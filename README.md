@@ -23,6 +23,7 @@ comprehensive testing across multiple platforms, with tests written in
 Required for the quickstart:
 - [git](https://git-scm.com/)
 - [VirtualBox](https://www.virtualbox.org/) 4.0.x, 4.1.x, 4.2.x, or 4.3.x
+- [Chef-DK](https://downloads.chef.io/chef-dk/)
 - [Vagrant](https://www.vagrantup.com/) 1.6+
   - [vagrant-omnibus plugin](https://github.com/schisamo/vagrant-omnibus)
   - [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf): note
