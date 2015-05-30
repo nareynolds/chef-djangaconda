@@ -68,7 +68,15 @@ $> vagrant ssh
 $vagrant> conda --version
 conda 3.12.0
 
-# ...have fun...
+# the `create` recipe created a new django project, let's see it
+$vagrant> cd my_project
+
+# start the django development server
+$vagrant> python manage.py runserver [::]:8000
+
+# open your browser and go to http://localhost:8001/
+# with any luck, you should see the "Welcome to Django" page.
+# press CTRL+c to stop the server
 
 # exit your VM
 $vagrant> exit
@@ -78,13 +86,13 @@ $vagrant> exit
 ## Usage
 
 #### [djangaconda::default](recipes/default.rb)
-This will install Anaconda, set the environment for all users, and install Django. Include any additional packages you want installed here. by modifying .
+This will install Anaconda, set the environment for all users, and install Django. You can modify this recipe to include any additional packages you may want.
 
 #### [djangaconda::create](recipes/create.rb)
 This will create a new Django project in the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the project name via the 'create_project_name' attribute.
 
 #### [djangaconda::clone](recipes/clone.rb)
-This will git clone a project to the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the repo's name, source, branch, and destination via the attributes 'clone_repo_name', 'clone_repo_source', 'clone_repo_branch', 'clone_repo_destination', respectively.
+This will git clone a project to the home directory of the user set for the install of Anaconda (default is 'vagrant'). Set the repo's name, source, branch, and destination via the attributes 'clone_repo_name', 'clone_repo_source', 'clone_repo_branch', 'clone_repo_destination', respectively. The defaults point to a repo that contains the completed [Poll Tutorial](https://docs.djangoproject.com/en/1.8/intro/) for Django 1.8.
 
 Just include one of all of these recipes in your node's `run_list`:
 
