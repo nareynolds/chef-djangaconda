@@ -128,13 +128,13 @@ Just include one of all of these recipes in your node's `run_list`:
     <td><tt>['djangaconda']['clone_repo_name']</tt></td>
     <td>String</td>
     <td>Name of git repository to clone</td>
-    <td><tt>...</tt></td>
+    <td><tt>"django-polls-tutorial"</tt></td>
   </tr>
   <tr>
     <td><tt>['djangaconda']['clone_repo_source']</tt></td>
     <td>String</td>
     <td>Source of git repository to clone</td>
-    <td><tt>...</tt></td>
+    <td><tt>"git://github.com/nareynolds/django-polls-tutorial.git"</tt></td>
   </tr>
   <tr>
     <td><tt>['djangaconda']['clone_repo_branch']</tt></td>
