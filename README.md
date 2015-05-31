@@ -5,7 +5,7 @@ Chef cookbook for provisioning a Django project with [Continuum Analytic](http:/
 A simple and complete example of how to use this cookbook for your own project can be found here: ....
 
 Resources for best practices for testing and development of such a cookbook:
-- [git](https://git-scm.com/)
+- [Git](https://git-scm.com/)
 - [VirtualBox](https://www.virtualbox.org/)
 - [Vagrant](https://www.vagrantup.com) for development
 - [Chef-DK](https://downloads.chef.io/chef-dk/)
@@ -21,7 +21,7 @@ comprehensive testing across multiple platforms, with tests written in
 ## Requirements
 
 Required for the quickstart:
-- [git](https://git-scm.com/)
+- [Git](https://git-scm.com/)
 - [VirtualBox](https://www.virtualbox.org/) 4.0.x, 4.1.x, 4.2.x, or 4.3.x
 - [Chef-DK](https://downloads.chef.io/chef-dk/)
 - [Vagrant](https://www.vagrantup.com/) 1.6+
