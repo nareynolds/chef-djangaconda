@@ -29,12 +29,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.10"
+  #config.vm.network "private_network", ip: "192.168.33.10"
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 8000, host: 8001
+  config.vm.network "forwarded_port", guest: 80, host: 4567 # apache default port
+  config.vm.network "forwarded_port", guest: 8000, host: 8001 # django dev default port
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -53,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "chef_solo" do |chef|
 
     # Cookbooks directory path relative to this file
-    chef.cookbooks_path = "cookbooks"
+    # chef.cookbooks_path = "cookbooks"
 
     # specify cookbook attributes
     chef.json = {
@@ -64,18 +64,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :accept_license => 'yes',
       },
       :djangaconda => {
-        :create_project_name => 'my_project',
-        :clone_repo_name => 'django-polls-tutorial',
-        :clone_repo_source => 'git://github.com/nareynolds/django-polls-tutorial.git',
-        :clone_repo_branch => 'master',
+        :project_name => 'polls_tutorial',
+        :project_install_method => 'git-clone',
+        :project_gitrepo_name => 'django-polls-tutorial',
+        :project_gitrepo_source => 'git://github.com/nareynolds/django-polls-tutorial.git',
+        :project_gitrepo_branch => 'master',
+        :server => 'apache-mod_wsgi',
       },
     }
 
     # specify the chef run list
     chef.run_list = [
       'recipe[djangaconda::default]',
-      'recipe[djangaconda::create]',
-      'recipe[djangaconda::clone]',
+      'recipe[djangaconda::server]',
+      # 'recipe[djangaconda::database]',
     ]
 
   end
