@@ -57,27 +57,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # specify cookbook attributes
     chef.json = {
-      :anaconda => {
-        :version => 'miniconda-python3',
-        #:version => '3-2.2.0',
-        :flavor => 'x86_64', # should match VM
-        :accept_license => 'yes',
-      },
       :djangaconda => {
+        :conda_version => 'miniconda-python3', # '3-2.2.0',
+        :conda_flavor => 'x86_64', # should match VM
+        :conda_owner => 'vagrant',
+        :conda_group => 'vagrant',
         :project_name => 'polls_tutorial',
         :project_install_method => 'git-clone',
         :project_gitrepo_name => 'django-polls-tutorial',
         :project_gitrepo_source => 'git://github.com/nareynolds/django-polls-tutorial.git',
         :project_gitrepo_branch => 'master',
-        :server => 'apache-mod_wsgi',
+        :project_migrate => true,
+        :server => 'nginx-gunicorn',
       },
     }
 
     # specify the chef run list
     chef.run_list = [
       'recipe[djangaconda::default]',
-      'recipe[djangaconda::server]',
-      # 'recipe[djangaconda::database]',
     ]
 
   end

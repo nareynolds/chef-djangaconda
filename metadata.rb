@@ -8,4 +8,3 @@ version          '0.1.0'
 
 depends          'anaconda', '~> 0.5.2'
 depends          'git', '~> 4.2.2'
-depends          'apache2', '~> 3.1.0'
