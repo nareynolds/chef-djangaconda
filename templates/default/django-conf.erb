@@ -1,0 +1,11 @@
+description "Start Django development server"
+
+start on startup
+stop on shutdown
+
+respawn
+setuid <%= @owner %>
+setgid <%= @group %>
+env PATH=<%= @conda_bin_dir %>
+
+exec python <%= @project_dir %>/manage.py runserver 0.0.0.0:8000

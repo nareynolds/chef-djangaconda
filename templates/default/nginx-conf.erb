@@ -1,0 +1,14 @@
+server {
+    listen <%= @nginx_port %>;
+    server_name <%= @nginx_domain %>;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root <%= @project_dir %>;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:<%= "#{@project_dir}/#{@project_name}.sock" %>;
+    }
+}

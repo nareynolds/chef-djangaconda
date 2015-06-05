@@ -8,7 +8,6 @@
 #
 
 
-
 # anaconda setup
 include_recipe 'djangaconda::anaconda'
 

@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/trusty64" # Ubuntu Server Trusty 14.04
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -33,7 +33,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  config.vm.network "forwarded_port", guest: 80, host: 4567 # apache default port
   config.vm.network "forwarded_port", guest: 8000, host: 8001 # django dev default port
 
   # Share an additional folder to the guest VM. The first argument is
@@ -58,17 +57,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # specify cookbook attributes
     chef.json = {
       :djangaconda => {
+        :owner => 'vagrant',
+        :group => 'vagrant',
         :conda_version => 'miniconda-python3', # '3-2.2.0',
         :conda_flavor => 'x86_64', # should match VM
-        :conda_owner => 'vagrant',
-        :conda_group => 'vagrant',
         :project_name => 'polls_tutorial',
         :project_install_method => 'git-clone',
         :project_gitrepo_name => 'django-polls-tutorial',
         :project_gitrepo_source => 'git://github.com/nareynolds/django-polls-tutorial.git',
         :project_gitrepo_branch => 'master',
-        :project_migrate => true,
-        :server => 'nginx-gunicorn',
+        :project_migrate => false,
+        :server_type => 'nginx-gunicorn', # 'development'
+        :server_start => true,
       },
     }
 

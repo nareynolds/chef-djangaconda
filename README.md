@@ -1,6 +1,6 @@
 # djangaconda Cookbook
 
-Chef cookbook for provisioning a Django project with [Continuum Analytic](http://continuum.io/)'s [Anaconda](https://store.continuum.io/cshop/anaconda/).
+Chef cookbook for setting up a Django project with [Continuum Analytic](http://continuum.io/)'s [Anaconda](https://store.continuum.io/cshop/anaconda/).
 
 A simple and complete example of how to use this cookbook for your own project can be found here: ....
 
@@ -20,7 +20,7 @@ comprehensive testing across multiple platforms, with tests written in
 
 ## Requirements
 
-Required for the quickstart:
+Required installations for the quickstart:
 - [Git](https://git-scm.com/)
 - [VirtualBox](https://www.virtualbox.org/) 4.0.x, 4.1.x, 4.2.x, or 4.3.x
 - [Chef-DK](https://downloads.chef.io/chef-dk/)
@@ -49,7 +49,7 @@ This awesome cookbook and more details about using it can be found at its repo: 
 
 ## Quickstart
 
-The [Vagrantfile](Vagrantfile) is written to get your Anaconda environment up and running with minimal effort (though it will take at least a few minutes to download the Anaconda installer itself).
+The [Vagrantfile](Vagrantfile) is written to set up an Ubuntu 14.04 box provisioned with PostgreSQL, Nginx, Gunicorn, Anaconda, and Django. It will also install the well-know "Poll Tutorial" Django project. Please, note that the setup may take a while the first time Vagrant must download the Ubuntu box, and that it will take at least a few minutes to download the Anaconda installer.
 
 ```bash
 # clone this repo
