@@ -20,16 +20,21 @@ default.djangaconda.project_gitrepo_name = "#{node.djangaconda.project_name}"
 default.djangaconda.project_gitrepo_source = 'git://github.com/nareynolds/django-polls-tutorial.git'
 default.djangaconda.project_gitrepo_branch = 'master'
 
+# database attributes
+default.djangaconda.database_type = 'sqlite' #, 'postgresql', 'mysql'
+default.djangaconda.database_name = 'db' # should match entry in settings.py
+default.djangaconda.database_user = "#{node.djangaconda.owner}"
+default.djangaconda.database_password = '' # md5?
+default.djangaconda.database_migrate = false #, true
+default.djangaconda.postgresql_password = 'somebigstrongpassword'
+default.djangaconda.postgresql_host = '127.0.0.1'
+default.djangaconda.postgresql_port = '5432'
+default.djangaconda.postgresql_listen_addresses = 'localhost'
+
 # server attributes
-default.djangaconda.server_type = 'development' #, 'nginx-gunicorn', 'apache-mod_wsgi'
+default.djangaconda.server_type = 'django-dev' #, 'nginx-gunicorn', 'apache-mod_wsgi'
 default.djangaconda.server_start = true
 default.djangaconda.gunicorn_workers = '3'
 default.djangaconda.nginx_port = '8000'
 default.djangaconda.nginx_domain = '127.0.0.1'
-
-# databse attributes
-# ...
-
-# migrate project
-default.djangaconda.project_migrate = false #, true
-
+default.djangaconda.collect_static_files = false

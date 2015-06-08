@@ -66,8 +66,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :project_gitrepo_name => 'django-polls-tutorial',
         :project_gitrepo_source => 'git://github.com/nareynolds/django-polls-tutorial.git',
         :project_gitrepo_branch => 'master',
-        :project_migrate => false,
-        :server_type => 'nginx-gunicorn', # 'development'
+        :database_type => 'postgresql', # 'sqlite'
+        :postgresql_password => 'somebigstrongpassword',
+        :database_name => 'db',
+        :database_user => 'pollster',
+        :database_password => 'anotherbigstrongpassword',
+        :database_migrate => true,
+        :server_type => 'nginx-gunicorn', # 'django-dev'
+        :collect_static_files => true,
         :server_start => true,
       },
     }

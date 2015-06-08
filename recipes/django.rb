@@ -41,7 +41,7 @@ gitrepo_source = node.djangaconda.project_gitrepo_source
 gitrepo_branch = node.djangaconda.project_gitrepo_branch
 
 
-# how to install project?
+# select project install method
 case install_method
 
   when 'create-new'
