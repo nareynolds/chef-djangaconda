@@ -53,7 +53,7 @@ This awesome cookbook and more details about using it can be found at its repo: 
 
 ## Quickstart
 
-The [Vagrantfile](Vagrantfile) is written to set up and run the well known Django "Polls Tutorial" project on an Ubuntu 14.04 virtual box provisioned with Django installed in a Python 3.4 Anaconda environment, PostgreSQL, Nginx, and Gunicorn. Please, note that the setup may take a while the first time Vagrant must download the Ubuntu box, and that it will take at least a few minutes to download the Anaconda installer.
+The [Vagrantfile](Vagrantfile) is written to set up and run the well known Django 1.8 ["Polls Tutorial"](https://docs.djangoproject.com/en/1.8/intro/) project on an Ubuntu 14.04 virtual box provisioned with Django installed in a Python 3.4 Anaconda environment, PostgreSQL, Nginx, and Gunicorn. Please, note that the setup may take a while the first time Vagrant must download the Ubuntu box, and that it will take at least a few minutes to download the Anaconda installer.
 
 ```bash
 # clone this repo
@@ -95,13 +95,19 @@ $> vagrant destroy
 ## Usage
 
 #### [djangaconda::default](recipes/default.rb)
-This will install Anaconda, set the environment for all users, and install Django. You can modify this recipe to include any additional packages you may want.
+This recipe simply calls the following recipes in an order that makes sense for setting up a django project.
 
-#### [djangaconda::create](recipes/create.rb)
-This will create a new Django project in the home direcotry of the user set for the install of Anaconda (default is 'vagrant'). Set the project name via the 'create_project_name' attribute.
+#### [djangaconda::anaconda](recipes/anaconda.rb)
+This will install Anaconda, and set the environment for all users.
 
-#### [djangaconda::clone](recipes/clone.rb)
-This will git clone a project to the home directory of the user set for the install of Anaconda (default is 'vagrant'). Set the repo's name, source, branch, and destination via the attributes 'clone_repo_name', 'clone_repo_source', 'clone_repo_branch', 'clone_repo_destination', respectively. The defaults point to a repo that contains the completed [Poll Tutorial](https://docs.djangoproject.com/en/1.8/intro/) for Django 1.8.
+#### [djangaconda::django](recipes/django.rb)
+This will install Django into the Anaconda environment. Based on the attribute settings, it can then create a new Django project, git clone a project from a remote repository, or neither. By default these projects are installed in the home direcotry of the user set for the install of Anaconda (default is 'vagrant').
+
+#### [djangaconda::database](recipes/database.rb)
+The attribute settings will determine the database used for the project. The default database is SQLite, as this is the case for a newly create Django project, and Django will manage its creation. If a PostgreSQL database is selected, it will be installed, configured, and run. The default attribute settings will also execute a database migration of the Django project. Be sure your settings.py file accurately reflects your choice of database.
+
+#### [djangaconda::server](recipes/server.rb)
+The attribute settings will determine the server used for the project. The default database is the Django development server. If a Nginx-Gunicorn server is selected, both will be installed and configured. Be sure your settings.py file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
 
 Just include one of all of these recipes in your node's `run_list`:
 
@@ -110,8 +116,6 @@ Just include one of all of these recipes in your node's `run_list`:
   "name":"my_node",
   "run_list": [
     "recipe[djangaconda::default]",
-    "recipe[djangaconda::create]",
-    "recipe[djangaconda::clone]",
   ]
 }
 ```
