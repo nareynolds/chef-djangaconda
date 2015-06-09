@@ -66,8 +66,11 @@ $> cd chef-djangaconda
 $> vagrant up
 ... lots of stuff...
 
-# when it's done, point your web browser at http://localhost:8001/
+# when it's done, point your web browser at http://localhost:8001/polls/
 # and explore the "Polls Turial" website
+
+# you can also view the admin pages at http://localhost:8001/admin/
+# login with username='admin' and password='1234'
 
 # you can ssh into your fully provisioned VM
 $> vagrant ssh
@@ -75,14 +78,6 @@ $> vagrant ssh
 # you'll find the "Polls Tutorial" project here:
 $vagrant> ls django-polls-tutorial/
 ... project stuff...
-
-# to access admin page, you need to create a superuser
-cd django-polls-tutorial/
-python manage.py createsuperuser
-... enter a username, email, and password...
-
-# now, point your web browser at http://localhost:8001/admin
-# you should be able to login with the username you just created
 
 # exit your VM
 $vagrant> exit
@@ -104,7 +99,7 @@ This will install Anaconda, and set the environment for all users.
 This will install Django into the Anaconda environment. Based on the attribute settings, it can then create a new Django project, git clone a project from a remote repository, or neither. By default these projects are installed in the home directory of the user set for the install of Anaconda (default is 'vagrant').
 
 #### [djangaconda::database](recipes/database.rb)
-The attribute settings will determine the database used for the project. The default database is SQLite, as this is the case for a newly create Django project, and Django will manage its creation. If a PostgreSQL database is selected, it will be installed, configured, and run. The default attribute settings will also execute a database migration of the Django project. Be sure your project's `settings.py` file accurately reflects your choice of database.
+The attribute settings will determine the database used for the project and its setup. The default database is SQLite, as this is the case for a newly create Django project, and Django will manage its creation. If a PostgreSQL database is selected, it will be installed, configured, and run. The default attribute settings will also execute a database migration of the Django project. Be sure your project's `settings.py` file accurately reflects your choice of database. You can automatically execute the loading of a fixture file into your database. Be sure your project's `settings.py` file accurately reflects the directory containing your fixture file.
 
 #### [djangaconda::server](recipes/server.rb)
 The attribute settings will determine the server used for the project. The default database is the Django development server. If a Nginx-Gunicorn server is selected, both will be installed and configured. Be sure your project's `settings.py` file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
@@ -215,6 +210,18 @@ Just include one or all of these recipes in your node's `run_list`:
     <td><tt>`true`</tt></td>
   </tr>
   <tr>
+    <td><tt>"database_loaddata"</tt></td>
+    <td>Boolean</td>
+    <td>Automatic loading of fixture data in database</td>
+    <td><tt>`false`</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"database_fixture"</tt></td>
+    <td>String</td>
+    <td>Name of fixture file to load into the database</td>
+    <td><tt>"initial_data.json"</tt></td>
+  </tr>
+  <tr>
     <td><tt>"postgresql_password"</tt></td>
     <td>String</td>
     <td>Password for `postgres` PostgreSQL user</td>
@@ -230,7 +237,7 @@ Just include one or all of these recipes in your node's `run_list`:
     <td><tt>"server_start"</tt></td>
     <td>Boolean</td>
     <td>Start server on setup</td>
-    <td><tt>`false`</tt></td>
+    <td><tt>`true`</tt></td>
   </tr>
   <tr>
     <td><tt>"collect_static_files"</tt></td>

@@ -25,6 +25,8 @@ database_name = node.djangaconda.database_name
 database_user = node.djangaconda.database_user
 database_password = node.djangaconda.database_password
 database_migrate = node.djangaconda.database_migrate
+database_loaddata = node.djangaconda.database_loaddata
+database_fixture = node.djangaconda.database_fixture
 
 # PostgreSQL settings
 postgresql_host = node.djangaconda.postgresql_host
@@ -99,7 +101,7 @@ end
 if database_migrate
 
   # makemigrations
-  execute 'migrate_django_project' do
+  execute 'makemigrations_django_project' do
     command "python manage.py makemigrations"
     action :run
     group conda_group
@@ -119,3 +121,20 @@ if database_migrate
   end
   
 end
+
+
+# load database from fixture file?
+if database_loaddata
+
+  # loaddata
+  execute 'loaddata_django_project' do
+    command "python manage.py loaddata #{database_fixture}"
+    action :run
+    group conda_group
+    user conda_owner
+    cwd project_parent_dir
+    environment ({ 'PATH' => "#{conda_bin_dir}:#{ENV["PATH"]}" })
+  end
+
+end
+

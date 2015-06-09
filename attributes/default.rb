@@ -26,6 +26,8 @@ default.djangaconda.database_name = 'db' # should match entry in settings.py
 default.djangaconda.database_user = "#{node.djangaconda.owner}"
 default.djangaconda.database_password = ''
 default.djangaconda.database_migrate = true
+default.djangaconda.database_loaddata = false
+default.djangaconda.database_fixture = 'initial_data.json'
 default.djangaconda.postgresql_password = ''
 default.djangaconda.postgresql_host = '127.0.0.1'
 default.djangaconda.postgresql_port = '5432'
@@ -33,7 +35,7 @@ default.djangaconda.postgresql_listen_addresses = 'localhost'
 
 # server attributes
 default.djangaconda.server_type = 'django-dev' #, 'nginx-gunicorn', 'apache-mod_wsgi'
-default.djangaconda.server_start = false
+default.djangaconda.server_start = true
 default.djangaconda.gunicorn_workers = '3'
 default.djangaconda.nginx_port = '8000'
 default.djangaconda.nginx_domain = '127.0.0.1'
