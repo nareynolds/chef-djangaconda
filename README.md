@@ -108,7 +108,7 @@ The attribute settings will determine the database used for the project and its 
 #### [djangaconda::server](recipes/server.rb)
 The attribute settings will determine the server used for the project. The default database is the Django development server. If a Nginx-Gunicorn server is selected, both will be installed and configured. Be sure your project's `settings.py` file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
 
-Note: A unix upstart file is created for each server, so you can start, stop, and restart them as follows:
+Note: A unix upstart file is created for each server. From within your VM, you can start, stop, and restart them as follows:
 ```bash
 # start, stop, restart django dev server
 $vagrant> sudo service django start
