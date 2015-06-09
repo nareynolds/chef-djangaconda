@@ -55,24 +55,37 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.cookbooks_path = "cookbooks"
 
     # specify cookbook attributes
+    # (use defaults to create a blank project running on the django dev server)
+    # chef.json = {
+    #   :djangaconda => {
+    #     :project_name => 'my_great_project',
+    #     :database_type => 'sqlite',
+    #     :database_migrate => true,
+    #     :server_type => 'django-dev'
+    #     :server_start => true,
+    #   },
+    # }
+
+    # specify cookbook attributes
+    # (git clone Polls app and run on PostresSQL, Nginx, Gunicorn)
     chef.json = {
       :djangaconda => {
         :owner => 'vagrant',
         :group => 'vagrant',
-        :conda_version => 'miniconda-python3', # '3-2.2.0',
-        :conda_flavor => 'x86_64', # should match VM
+        :conda_version => 'miniconda-python3',
+        :conda_flavor => 'x86_64', # should match VM choice above
         :project_name => 'polls_tutorial',
         :project_install_method => 'git-clone',
         :project_gitrepo_name => 'django-polls-tutorial',
         :project_gitrepo_source => 'git://github.com/nareynolds/django-polls-tutorial.git',
         :project_gitrepo_branch => 'master',
-        :database_type => 'postgresql', # 'sqlite'
+        :database_type => 'postgresql',
         :postgresql_password => 'somebigstrongpassword',
-        :database_name => 'db',
-        :database_user => 'pollster',
-        :database_password => 'anotherbigstrongpassword',
+        :database_name => 'db', # should match settings.py
+        :database_user => 'pollster', # should match settings.py
+        :database_password => 'anotherbigstrongpassword', # should match settings.py
         :database_migrate => true,
-        :server_type => 'nginx-gunicorn', # 'django-dev'
+        :server_type => 'nginx-gunicorn',
         :collect_static_files => true,
         :server_start => true,
       },
