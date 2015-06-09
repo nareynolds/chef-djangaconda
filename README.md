@@ -26,7 +26,7 @@ Required installations for the quickstart:
 - [Chef-DK](https://downloads.chef.io/chef-dk/)
 - [Vagrant](https://www.vagrantup.com/) 1.6+
   - [vagrant-omnibus plugin](https://github.com/schisamo/vagrant-omnibus)
-  - [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf): note
+  - [vagrant-berkshelf plugin](https://github.com/berkshelf/vagrant-berkshelf): note
     that `>= 2.0.1` is required
 
 Full list of cookbook dependencies for djangaconda:
