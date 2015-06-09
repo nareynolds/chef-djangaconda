@@ -7,21 +7,15 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# install Anaconda
-include_recipe 'anaconda::default'
 
-# set Anaconda environement for all users
-include_recipe 'anaconda::shell_conveniences'
+# anaconda setup
+include_recipe 'djangaconda::anaconda'
 
-# install django into Anaconda
-anaconda_package 'django' do
-  action :install
-end
+# django setup
+include_recipe 'djangaconda::django'
 
-# install any other packages...
+# database setup
+include_recipe 'djangaconda::database'
 
-# install rpy2 into Anaconda
-# anaconda_package 'rpy2' do
-#   action :install
-#   channel "https://conda.binstar.org/r"
-# end
+# server setup
+include_recipe 'djangaconda::server'

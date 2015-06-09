@@ -25,16 +25,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/trusty64" # Ubuntu Server Trusty 14.04
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.10"
+  #config.vm.network "private_network", ip: "192.168.33.10"
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 8000, host: 8001
+  config.vm.network "forwarded_port", guest: 8000, host: 8001 # django dev default port
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -53,29 +52,48 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "chef_solo" do |chef|
 
     # Cookbooks directory path relative to this file
-    chef.cookbooks_path = "cookbooks"
+    # chef.cookbooks_path = "cookbooks"
 
-    # specify cookbook attributes
+    # Example: specify cookbook attributes
+    # (use defaults to create a blank project running on SQLite and the django dev server)
     chef.json = {
-      :anaconda => {
-        :version => 'miniconda-python3',
-        #:version => '3-2.2.0',
-        :flavor => 'x86_64', # should match VM
-        :accept_license => 'yes',
-      },
       :djangaconda => {
-        :create_project_name => 'my_project',
-        :clone_repo_name => 'django-polls-tutorial',
-        :clone_repo_source => 'git://github.com/nareynolds/django-polls-tutorial.git',
-        :clone_repo_branch => 'master',
+        :conda_version => 'miniconda-python3',
+        :conda_flavor => 'x86_64', # should match VM choice above
+        :project_name => 'my_great_project',
       },
     }
+
+    # specify cookbook attributes
+    # (git clone Polls Tutorial project and run it on PostresSQL, Nginx, Gunicorn)
+    # chef.json = {
+    #   :djangaconda => {
+    #     :owner => 'vagrant',
+    #     :group => 'vagrant',
+    #     :conda_version => 'miniconda-python3',
+    #     :conda_flavor => 'x86_64', # should match VM choice above
+    #     :project_name => 'polls_tutorial',
+    #     :project_install_method => 'git-clone',
+    #     :project_gitrepo_name => 'django-polls-tutorial',
+    #     :project_gitrepo_source => 'git://github.com/nareynolds/django-polls-tutorial.git',
+    #     :project_gitrepo_branch => 'master',
+    #     :database_type => 'postgresql',
+    #     :postgresql_password => 'somebigstrongpassword',
+    #     :database_name => 'db', # should match settings.py
+    #     :database_user => 'pollster', # should match settings.py
+    #     :database_password => 'anotherbigstrongpassword', # should match settings.py
+    #     :database_migrate => true,
+    #     :database_loaddata => true,
+    #     :database_fixture => 'project_data.json',
+    #     :server_type => 'nginx-gunicorn',
+    #     :collect_static_files => true,
+    #     :server_start => true,
+    #   },
+    # }
 
     # specify the chef run list
     chef.run_list = [
       'recipe[djangaconda::default]',
-      'recipe[djangaconda::create]',
-      'recipe[djangaconda::clone]',
     ]
 
   end

@@ -8,3 +8,5 @@ version          '0.1.0'
 
 depends          'anaconda', '~> 0.5.2'
 depends          'git', '~> 4.2.2'
+depends          'postgresql', '~> 3.4.20'
+depends          'database', '~> 4.0.6'
