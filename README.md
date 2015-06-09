@@ -2,7 +2,7 @@
 
 Chef cookbook for setting up a Django project with [Continuum Analytic](http://continuum.io/)'s [Anaconda](https://store.continuum.io/cshop/anaconda/).
 
-A simple and complete example of how to use this cookbook for your own project can be found here: under construction...
+A simple and complete example of how to use this cookbook for your own project can be found here: ...under construction...
 
 Resources for best practices for testing and development of such a cookbook:
 - [Git](https://git-scm.com/)
@@ -79,6 +79,10 @@ $> vagrant ssh
 $vagrant> ls django-polls-tutorial/
 ... project stuff...
 
+# you can restart the servers if necessary
+$vagrant> sudo service gunicorn restart
+$vagrant> sudo service nginx restart
+
 # exit your VM
 $vagrant> exit
 
@@ -103,6 +107,24 @@ The attribute settings will determine the database used for the project and its 
 
 #### [djangaconda::server](recipes/server.rb)
 The attribute settings will determine the server used for the project. The default database is the Django development server. If a Nginx-Gunicorn server is selected, both will be installed and configured. Be sure your project's `settings.py` file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
+
+Note: A unix upstart file is created for each server, so you can start, stop, and restart them as follows:
+```bash
+# start, stop, restart django dev server
+$vagrant> sudo service django start
+$vagrant> sudo service django stop
+$vagrant> sudo service django restart
+
+# start, stop, restart gunicorn
+$vagrant> sudo service gunicorn start
+$vagrant> sudo service gunicorn stop
+$vagrant> sudo service gunicorn restart
+
+# sudo service nginx restart
+$vagrant> sudo service nginx start
+$vagrant> sudo service nginx stop
+$vagrant> sudo service nginx restart
+```
 
 Just include one or all of these recipes in your node's `run_list`:
 
