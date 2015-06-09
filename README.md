@@ -125,43 +125,128 @@ Just include one of all of these recipes in your node's `run_list`:
 
 <table>
   <tr>
-    <th>Key</th>
+    <th>['djangaconda']['Key']</th>
     <th>Type</th>
     <th>Description</th>
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['djangaconda']['create_project_name']</tt></td>
+    <td><tt>"owner"</tt></td>
     <td>String</td>
-    <td>Name of project to create</td>
+    <td>User that installations are made under</td>
+    <td><tt>"vagrant"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"group"</tt></td>
+    <td>String</td>
+    <td>Group that installations are made under</td>
+    <td><tt>"vagrant"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"conda_version"</tt></td>
+    <td>String</td>
+    <td>Anaconda version: `2.2.0`, `3-2.2.0`, `miniconda-python2`, `miniconda-python3`</td>
+    <td><tt>"3-2.2.0"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"conda_flavor"</tt></td>
+    <td>String</td>
+    <td>Processor: `x86` (32-bit), `x86_64` (64-bit)</td>
+    <td><tt>"x86_64"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"project_install_method"</tt></td>
+    <td>String</td>
+    <td>Django project install method: `create-new` or `git-clone`</td>
+    <td><tt>"create-new"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"project_name"</tt></td>
+    <td>String</td>
+    <td>Name of Django project to create or clone</td>
     <td><tt>"my_project"</tt></td>
   </tr>
   <tr>
-    <td><tt>['djangaconda']['clone_repo_name']</tt></td>
+    <td><tt>"project_gitrepo_name"</tt></td>
     <td>String</td>
     <td>Name of git repository to clone</td>
-    <td><tt>"django-polls-tutorial"</tt></td>
+    <td><tt>`node['djangaconda']['project_name']`</tt></td>
   </tr>
   <tr>
-    <td><tt>['djangaconda']['clone_repo_source']</tt></td>
+    <td><tt>"project_gitrepo_source"</tt></td>
     <td>String</td>
     <td>Source of git repository to clone</td>
     <td><tt>"git://github.com/nareynolds/django-polls-tutorial.git"</tt></td>
   </tr>
   <tr>
-    <td><tt>['djangaconda']['clone_repo_branch']</tt></td>
+    <td><tt>"project_gitrepo_branch"</tt></td>
     <td>String</td>
     <td>Branch of git repository to clone</td>
     <td><tt>"master"</tt></td>
   </tr>
   <tr>
-    <td><tt>['djangaconda']['clone_repo_destination']</tt></td>
+    <td><tt>"database_type"</tt></td>
     <td>String</td>
-    <td>Destination of where to clone the git repository</td>
-    <td><tt>"#{node.anaconda.home}"</tt></td>
+    <td>Database to use: `sqlite`, `postgresql`</td>
+    <td><tt>"sqlite"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"database_name"</tt></td>
+    <td>String</td>
+    <td>Name of Django project's database</td>
+    <td><tt>"db"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"database_user"</tt></td>
+    <td>String</td>
+    <td>Name of database user used by Django</td>
+    <td><tt>`node['djangaconda']['owner']`</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"database_password"</tt></td>
+    <td>String</td>
+    <td>Password for database user used by Django</td>
+    <td><tt>""</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"database_migrate"</tt></td>
+    <td>Boolean</td>
+    <td>Automatic migration of Django project on setup</td>
+    <td><tt>`true`</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"postgresql_password"</tt></td>
+    <td>String</td>
+    <td>Password for `postgres` PostgreSQL user</td>
+    <td><tt>""</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"postgresql_password"</tt></td>
+    <td>String</td>
+    <td>Password for `postgres` PostgreSQL user</td>
+    <td><tt>""</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"server_type"</tt></td>
+    <td>String</td>
+    <td>Server to use: `django-dev`, `nginx-gunicorn`</td>
+    <td><tt>"django-dev"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"server_start"</tt></td>
+    <td>Boolean</td>
+    <td>Start server on setup</td>
+    <td><tt>`false`</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"collect_static_files"</tt></td>
+    <td>Boolean</td>
+    <td>Automatic collection of Django project's static files</td>
+    <td><tt>`false`</tt></td>
   </tr>
 </table>
 
+Additional attributes that govern the setup of Anaconda, the servers, and databases can be found in [attibutes/default.rb](attibutes/default.rb).
 
 ## Contributing
 
