@@ -74,6 +74,7 @@ $> vagrant ssh
 
 # you'll find the "Polls Tutorial" project here:
 $vagrant> ls django-polls-tutorial/
+manage.py  polls  polls_tutorial  polls_tutorial.sock  README.md  static
 
 # to access admin page, you need to create a superuser
 # enter a username, email, and password when prompted
