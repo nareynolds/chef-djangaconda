@@ -109,7 +109,7 @@ The attribute settings will determine the database used for the project. The def
 #### [djangaconda::server](recipes/server.rb)
 The attribute settings will determine the server used for the project. The default database is the Django development server. If a Nginx-Gunicorn server is selected, both will be installed and configured. Be sure your project's `settings.py` file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
 
-Just include one of all of these recipes in your node's `run_list`:
+Just include one or all of these recipes in your node's `run_list`:
 
 ```json
 {
