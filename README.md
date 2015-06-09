@@ -221,12 +221,6 @@ Just include one or all of these recipes in your node's `run_list`:
     <td><tt>""</tt></td>
   </tr>
   <tr>
-    <td><tt>"postgresql_password"</tt></td>
-    <td>String</td>
-    <td>Password for `postgres` PostgreSQL user</td>
-    <td><tt>""</tt></td>
-  </tr>
-  <tr>
     <td><tt>"server_type"</tt></td>
     <td>String</td>
     <td>Server to use: `django-dev`, `nginx-gunicorn`</td>
