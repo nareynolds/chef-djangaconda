@@ -104,10 +104,10 @@ This will install Anaconda, and set the environment for all users.
 This will install Django into the Anaconda environment. Based on the attribute settings, it can then create a new Django project, git clone a project from a remote repository, or neither. By default these projects are installed in the home directory of the user set for the install of Anaconda (default is 'vagrant').
 
 #### [djangaconda::database](recipes/database.rb)
-The attribute settings will determine the database used for the project. The default database is SQLite, as this is the case for a newly create Django project, and Django will manage its creation. If a PostgreSQL database is selected, it will be installed, configured, and run. The default attribute settings will also execute a database migration of the Django project. Be sure your project's settings.py file accurately reflects your choice of database.
+The attribute settings will determine the database used for the project. The default database is SQLite, as this is the case for a newly create Django project, and Django will manage its creation. If a PostgreSQL database is selected, it will be installed, configured, and run. The default attribute settings will also execute a database migration of the Django project. Be sure your project's 'settings.py' file accurately reflects your choice of database.
 
 #### [djangaconda::server](recipes/server.rb)
-The attribute settings will determine the server used for the project. The default database is the Django development server. If a Nginx-Gunicorn server is selected, both will be installed and configured. Be sure your project's settings.py file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
+The attribute settings will determine the server used for the project. The default database is the Django development server. If a Nginx-Gunicorn server is selected, both will be installed and configured. Be sure your project's 'settings.py' file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
 
 Just include one of all of these recipes in your node's `run_list`:
 
