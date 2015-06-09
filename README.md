@@ -120,7 +120,7 @@ $vagrant> sudo service gunicorn start
 $vagrant> sudo service gunicorn stop
 $vagrant> sudo service gunicorn restart
 
-# sudo service nginx restart
+# start, stop, restart nginx
 $vagrant> sudo service nginx start
 $vagrant> sudo service nginx stop
 $vagrant> sudo service nginx restart
