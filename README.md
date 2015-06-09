@@ -101,7 +101,7 @@ This recipe simply calls the following recipes in an order that makes sense for 
 This will install Anaconda, and set the environment for all users.
 
 #### [djangaconda::django](recipes/django.rb)
-This will install Django into the Anaconda environment. Based on the attribute settings, it can then create a new Django project, git clone a project from a remote repository, or neither. By default these projects are installed in the home direcotry of the user set for the install of Anaconda (default is 'vagrant').
+This will install Django into the Anaconda environment. Based on the attribute settings, it can then create a new Django project, git clone a project from a remote repository, or neither. By default these projects are installed in the home directory of the user set for the install of Anaconda (default is 'vagrant').
 
 #### [djangaconda::database](recipes/database.rb)
 The attribute settings will determine the database used for the project. The default database is SQLite, as this is the case for a newly create Django project, and Django will manage its creation. If a PostgreSQL database is selected, it will be installed, configured, and run. The default attribute settings will also execute a database migration of the Django project. Be sure your settings.py file accurately reflects your choice of database.
