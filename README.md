@@ -127,7 +127,7 @@ Just include one or all of these recipes in your node's `run_list`:
   <tr>
     <th>['djangaconda']['Key']</th>
     <th>Type</th>
-    <th>Description</th>
+    <th>Attribute Description</th>
     <th>Default</th>
   </tr>
   <tr>
