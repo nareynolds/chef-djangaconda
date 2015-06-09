@@ -53,7 +53,7 @@ This awesome cookbook and more details about using it can be found at its repo: 
 
 ## Quickstart
 
-The [Vagrantfile](Vagrantfile) is written to set up an Ubuntu 14.04 box provisioned with PostgreSQL, Nginx, Gunicorn, Anaconda, and Django. It will also install the well-know "Poll Tutorial" Django project. Please, note that the setup may take a while the first time Vagrant must download the Ubuntu box, and that it will take at least a few minutes to download the Anaconda installer.
+The [Vagrantfile](Vagrantfile) is written to set up and run the well known Django "Polls Tutorial" project on an Ubuntu 14.04 virtual box provisioned with Django installed in a Python 3.4 Anaconda environment, PostgreSQL, Nginx, and Gunicorn. Please, note that the setup may take a while the first time Vagrant must download the Ubuntu box, and that it will take at least a few minutes to download the Anaconda installer.
 
 ```bash
 # clone this repo
@@ -64,27 +64,30 @@ $> cd chef-djangaconda
 
 # start up vagrant - may take a while
 $> vagrant up
-...
+... lots of stuff...
 
-# ssh into your fully provisioned VM
+# when it's done, point your web browser at http://localhost:8001/
+# and explore the "Polls Turial" website
+
+# you can ssh into your fully provisioned VM
 $> vagrant ssh
 
-# check your version of Anaconda
-$vagrant> conda --version
-conda 3.12.0
+# you'll find the "Polls Tutorial" project here:
+$vagrant> ls django-polls-tutorial/
 
-# the `create` recipe created a new django project, let's see it
-$vagrant> cd my_project
+# to access admin page, you need to create a superuser
+# enter a username, email, and password when prompted
+cd django-polls-tutorial/
+python manage.py createsuperuser
 
-# start the django development server
-$vagrant> python manage.py runserver [::]:8000
-
-# open your browser and go to http://localhost:8001/
-# with any luck, you should see the "Welcome to Django" page.
-# press CTRL+c to stop the server
+# now, point your web browser at http://localhost:8001/admin
+# you should be able to login with the username you just created
 
 # exit your VM
 $vagrant> exit
+
+# shut down the VM
+$> vagrant destroy
 ```
 
 
