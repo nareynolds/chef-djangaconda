@@ -2,8 +2,6 @@
 
 Chef cookbook for setting up a Django project with [Continuum Analytic](http://continuum.io/)'s [Anaconda](https://store.continuum.io/cshop/anaconda/).
 
-A simple and complete example of how to use this cookbook for your own project can be found here: ...under construction...
-
 Resources for best practices for testing and development of such a cookbook:
 - [Git](https://git-scm.com/)
 - [VirtualBox](https://www.virtualbox.org/)
@@ -53,7 +51,7 @@ This awesome cookbook and more details about using it can be found at its repo: 
 
 ## Quickstart
 
-The [Vagrantfile](Vagrantfile) is written to set up and run the well known Django 1.8 ["Polls Tutorial"](https://docs.djangoproject.com/en/1.8/intro/) project on an Ubuntu 14.04 virtual box provisioned with Django installed in a Python 3.4 Anaconda environment, PostgreSQL, Nginx, and Gunicorn. Please, note that the setup may take a while the first time Vagrant must download the Ubuntu box, and that it will take at least a few minutes to download the Anaconda installer.
+The [Vagrantfile](Vagrantfile) is written to set up and run the well-known Django 1.8 ["Polls Tutorial"](https://docs.djangoproject.com/en/1.8/intro/) project on an Ubuntu 14.04 virtual box provisioned with Django installed in a Python 3.4 Anaconda environment, PostgreSQL, Nginx, and Gunicorn. Please, note that the setup may take a while the first time Vagrant must download the Ubuntu box, and that it will take at least a few minutes to download the Anaconda installer.
 
 ```bash
 # clone this repo
@@ -86,12 +84,23 @@ $vagrant> sudo service nginx restart
 # exit your VM
 $vagrant> exit
 
-# shut down the VM
+# shut down your VM
 $> vagrant destroy
 ```
 
 
 ## Usage
+
+Simply include one or all of the following recipes in your node's `run_list`:
+
+```json
+{
+  "name":"my_node",
+  "run_list": [
+    "recipe[djangaconda::default]",
+  ]
+}
+```
 
 #### [djangaconda::default](recipes/default.rb)
 This recipe simply calls the following recipes in an order that makes sense for setting up a django project.
@@ -100,13 +109,13 @@ This recipe simply calls the following recipes in an order that makes sense for 
 This will install Anaconda, and set the environment for all users.
 
 #### [djangaconda::django](recipes/django.rb)
-This will install Django into the Anaconda environment. Based on the attribute settings, it can then create a new Django project, git clone a project from a remote repository, or neither. By default these projects are installed in the home directory of the user set for the install of Anaconda (default is 'vagrant').
+This will install Django into the Anaconda environment. Based on the attribute settings, it can then create a new Django project, git clone a project from a remote repository, or neither. By default these projects are installed in the home directory of the user set for the installation of Anaconda (default is 'vagrant').
 
 #### [djangaconda::database](recipes/database.rb)
-The attribute settings will determine the database used for the project and its setup. The default database is SQLite, as this is the case for a newly create Django project, and Django will manage its creation. If a PostgreSQL database is selected, it will be installed, configured, and run. The default attribute settings will also execute a database migration of the Django project. Be sure your project's `settings.py` file accurately reflects your choice of database. You can automatically execute the loading of a fixture file into your database. Be sure your project's `settings.py` file accurately reflects the directory containing your fixture file.
+The attribute settings will determine the database used for the project and its setup. The default database is SQLite, as this is the case for a newly created Django project, and Django will manage its creation. If a PostgreSQL database is selected, it will be installed, configured, and run. The default attribute settings will also execute a database migration of the Django project. Be sure your project's `settings.py` file accurately reflects your choice of database. You can automatically execute the loading of a fixture file into your database. Be sure your project's `settings.py` file accurately reflects the directory containing your fixture file.
 
 #### [djangaconda::server](recipes/server.rb)
-The attribute settings will determine the server used for the project. The default database is the Django development server. If a Nginx-Gunicorn server is selected, both will be installed and configured. Be sure your project's `settings.py` file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
+The attribute settings will determine the server used for the project. The default database is the Django development server. If the Nginx-Gunicorn setup is selected, both will be installed and configured so that Nginx serves up your static files and Gunicorn serves up your Django project. Be sure your project's `settings.py` file accurately reflects your choice of static-file handling. Set `node['djangaconda']['collect_static_files'] = true` to automatically execute a collection of your static files. The default attribute settings will also execute a restart of both servers.
 
 Note: A unix upstart file is created for each server. From within your VM, you can start, stop, and restart them as follows:
 ```bash
@@ -124,17 +133,6 @@ $vagrant> sudo service gunicorn restart
 $vagrant> sudo service nginx start
 $vagrant> sudo service nginx stop
 $vagrant> sudo service nginx restart
-```
-
-Just include one or all of these recipes in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[djangaconda::default]",
-  ]
-}
 ```
 
 
@@ -286,7 +284,10 @@ Additional attributes that govern the setup of Anaconda, the servers, and databa
 6. Submit a Pull Request using Github
 
 
-## Author
+## Authors and License
 
-Nathaniel Reynolds (nathaniel.reynolds@gmail.com)
+Author: Nathaniel Reynolds (nathaniel.reynolds@gmail.com)
 
+Copyright (c) 2015 Nathaniel Reynolds
+
+Freely distributable and licensed under the [MIT license](LICENSE).
