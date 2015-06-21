@@ -49,8 +49,12 @@ case database_type
     node.default.postgresql.password.postgres = postgresql_password
     node.default.postgresql.config.port = postgresql_port
     node.default.postgresql.config.listen_addresses = postgresql_listen_addresses
-    # set host?
     
+    # FIX: prevent postgresql from forcing build essential to execute at compile time
+    execute "apt-get update" do
+      action :nothing
+    end.run_action(:run)
+
     # install PostgresSQL database
     include_recipe 'postgresql::server'
 
