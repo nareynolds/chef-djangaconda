@@ -69,9 +69,9 @@ case database_type
     # define postgresql connection info
     postgresql_connection_info = {
       :host     => postgresql_host,
-      :port     => node['postgresql']['config']['port'],
+      :port     => node.postgresql.config.port,
       :username => 'postgres',
-      :password => node['postgresql']['password']['postgres']
+      :password => node.postgresql.password.postgres
     }
 
     # create a postgresql database
