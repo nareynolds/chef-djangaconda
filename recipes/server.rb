@@ -156,7 +156,7 @@ case server_type
 end #case server_type
 
 
-# collect django's static files for nginx to server?
+# collect django's static files for nginx to serve?
 if collect_static
 
   # collectstatic
