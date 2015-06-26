@@ -55,17 +55,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.cookbooks_path = "cookbooks"
 
     # Example: specify cookbook attributes
-    # (use defaults to create a blank project running on SQLite and the django dev server)
+    # to use defaults to install several python packages and 
+    # create a blank project running on SQLite and the django dev server
     # chef.json = {
     #   :djangaconda => {
     #     :conda_version => 'miniconda-python3',
     #     :conda_flavor => 'x86_64', # should match VM choice above
+    #     :conda_packages => [
+    #       { :name => 'astroid' },
+    #       { :name => 'rpy2', :channel => 'https://conda.binstar.org/r'},
+    #     ],
     #     :project_name => 'my_great_project',
     #   },
     # }
 
     # specify cookbook attributes
-    # (git clone Polls Tutorial project and run it on PostresSQL, Nginx, Gunicorn)
+    # to git clone Polls Tutorial project and run it on PostresSQL, Nginx, Gunicorn
     chef.json = {
       :djangaconda => {
         :owner => 'vagrant',

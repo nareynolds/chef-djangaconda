@@ -16,14 +16,6 @@ anaconda_package 'django' do
   action :install
 end
 
-# install any other desired packages...
-# for example, install rpy2 into Anaconda
-# anaconda_package 'rpy2' do
-#   action :install
-#   channel "https://conda.binstar.org/r"
-# end
-
-
 # anaconda settings
 conda_owner = node.djangaconda.owner
 conda_group = node.djangaconda.group

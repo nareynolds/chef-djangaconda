@@ -106,7 +106,7 @@ Simply include one or all of the following recipes in your node's `run_list`:
 This recipe simply calls the following recipes in an order that makes sense for setting up a django project.
 
 #### [djangaconda::anaconda](recipes/anaconda.rb)
-This will install Anaconda, and set the environment for all users.
+This will install Anaconda, and set the environment for all users. It can also use the Anaconda Cookbook's [anaconda_package](https://github.com/thmttch/chef-continuum-anaconda#resource-anaconda_package) resource to install any desired packages defined in the symbol hash `node['djangaconda']['conda_packages']`. See the [Vagrantfile](Vagrantfile) for a commented-out example.
 
 #### [djangaconda::django](recipes/django.rb)
 This will install Django into the Anaconda environment. Based on the attribute settings, it can then create a new Django project, git clone a project from a remote repository, or neither. By default these projects are installed in the home directory of the user set for the installation of Anaconda (default is 'vagrant').
@@ -168,6 +168,12 @@ $vagrant> sudo service nginx restart
     <td>String</td>
     <td>Processor: `x86` (32-bit), `x86_64` (64-bit)</td>
     <td><tt>"x86_64"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>"conda_packages"</tt></td>
+    <td>Hash</td>
+    <td>Symbol hash describing the packages to install</td>
+    <td><tt>`{}`</tt></td>
   </tr>
   <tr>
     <td><tt>"project_install_method"</tt></td>

@@ -10,6 +10,7 @@ default.djangaconda.conda_accept_license = 'yes' # to accept license
 default.djangaconda.conda_install_root = '/opt/anaconda'
 default.djangaconda.conda_install_dir = "#{node.djangaconda.conda_install_root}/#{node.djangaconda.conda_version}"
 default.djangaconda.conda_bin_dir = "#{default.djangaconda.conda_install_dir}/bin"
+default.djangaconda.conda_packages = {}
 
 # django project attributes
 default.djangaconda.project_install_method = 'create-new' #, 'git-clone', 
