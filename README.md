@@ -172,7 +172,7 @@ $vagrant> sudo service nginx restart
   <tr>
     <td><tt>"conda_packages"</tt></td>
     <td>Hash</td>
-    <td>Symbol has describing the packages to install</td>
+    <td>Symbol hash describing the packages to install</td>
     <td><tt>`{}`</tt></td>
   </tr>
   <tr>
